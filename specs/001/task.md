@@ -147,3 +147,10 @@
   Suite completa, Pint, PHPStan; revisión de la matriz RF↔módulo↔test completa.
   **Hecho cuando:** `pest` ✅ · `pint --test` ✅ · `phpstan` nivel 7 ✅ y los 19 RF están cubiertos por al menos un test en verde.
   ✅ **Completada (2026-11-14):** gates finales en verde — Pest **41/41 (151 aserciones)** · Pint `--test` ✅ · PHPStan nivel 7 (0 errores). Matriz RF↔módulo↔test (§4.3 del plan + §6.1 de la spec) completa y en verde: los 19 RF cubiertos (RF-01…RF-19 + §6.1.1/6.1.7). Definición de terminado (Spec §6.2) verificada: sin lógica en controlador (FormRequest → Action → Resource), excepciones de negocio en clases propias con mapper, sin Docker. Fase F1 (MVP del backend multi-almacén) **completa**.
+
+## M9 — Inbound (F2)
+
+- [x] **T-26 — Inbound: movimiento inbound + creación de inventario** *(Plan P-07 · RF-07a)*
+  Migración: relajar CHECK de `inventory_movements.type` a `IN ('inbound', 'outbound')`. `InboundStockAction`: valida referencias/estado, crea movimiento inbound + crea/incrementa inventario (`on_hand += quantity`) en transacción. Tests: inbound crea fila inexistente / incrementa existente.
+  **Hecho cuando:** inbound crea inventario inexistente → stock = quantity; inbound incrementa inventario existente → before/after exactos.
+  ✅ **Completada (2026-11-14):** migración `2026_11_14_000006_relax_inventory_movements_type_check` (CHECK relajado a `IN ('inbound','outbound')`). `App\Actions\InboundStockAction` + DTOs `InboundStockCommand`/`InboundStockResult`. Tests: inbound crea fila inexistente (stock 0→5) y la incrementa (10→14 con before/after exactos). Gates: Pest 43/43 (164 aserciones) · Pint · PHPStan 7 ✅.
