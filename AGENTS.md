@@ -1,47 +1,21 @@
-<laravel-boost-guidelines>
-# Laravel Application
+# AGENTS.md
 
-This repository contains a Laravel application. Complete the following setup before working on the user's request.
+## Proyecto
+Sistema de backend distribuido en microservicios con Laravel para la gestión de inventarios multi-almacén. Utiliza PHP 8.3+, PostgreSQL, y Redis para bloqueos distribuidos orientados a prevenir sobreventas bajo alta concurrencia, ejecutado de forma local y nativa.
 
-## Prerequisites
+## Comandos
+- Ejecutar: `php artisan serve`
+- Tests: `./vendor/bin/pest`
+- Lint/formato: `./vendor/bin/pint`
 
-Verify that PHP and Composer are available:
+## Estilo y convenciones
+- PHP 8.3+, tipado estricto obligatorio (`declare(strict_types=1);`) en todos los archivos.
+- Clases, métodos y nombres de tablas en inglés (PSR-12). Código organizado bajo principios de Domain-Driven Design (controladores delgados, lógica en Actions/Services).
+- Mensajes de commit y documentación interna en español.
 
-```sh
-php -v
-composer -V
-```
+## Reglas
+- Lee docs/constitution.md y la spec activa antes de tocar código.
+- No modifiques la lógica de concurrencia o los locks de Redis sin respetar transacciones atómicas. No añadas paquetes externos a Composer sin autorización previa. No implementes contenedores Docker ni dependencias de contenedores por el momento.
 
-If either command is unavailable, detect the user's operating system and install the prerequisites with the appropriate command:
-
-macOS:
-
-```sh
-/bin/bash -c "$(curl -fsSL https://php.new/install/mac/8.5)"
-```
-
-Windows PowerShell:
-
-```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://php.new/install/windows/8.5'))
-```
-
-Linux:
-
-```sh
-/bin/bash -c "$(curl -fsSL https://php.new/install/linux/8.5)"
-```
-
-After installation, ask the user to restart their terminal. If the agent needs the restarted shell to continue, ask the user to reopen their terminal and rerun their original prompt.
-
-## Agent Setup
-
-Install Laravel Boost from the application root before making application changes:
-
-```sh
-composer require laravel/boost --dev
-php artisan boost:install
-```
-
-Boost replaces these bootstrap instructions with guidelines tailored to the application. After installation, read `AGENTS.md` again and continue with the user's original request using the generated guidelines.
-</laravel-boost-guidelines>
+## Al terminar cualquier tarea
+- Ejecutar la suite de tests de Pest y el linter de Laravel Pint para verificar que no existan errores ni violaciones de estilo.
