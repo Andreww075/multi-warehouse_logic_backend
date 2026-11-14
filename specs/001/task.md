@@ -141,7 +141,7 @@
   **Hecho cuando:** exactamente 10×200 y 10×409, `on_hand` final 0, 10 movimientos, cero 503 en el run (run limpio).
   ✅ **Completada (2026-11-14):** pool de 20 procesos CLI (`tests/Concurrency/DeductStockProcess.php` + `Symfony\Component\Process\Process`) contra stock 10, keys únicas, quantity 1, `on_hand` final 0, 10 movimientos, **10×`ok` (200) + 10×`insufficient` (409), cero errores/503**; presupuesto de tiempo respetado (elapsed < 90 s).
 
-## M8 — Cierre
+## M8 — Cierre 
 
 - [x] **T-25 — Gates finales y Definición de terminado** *(Art. II.4 · Spec §6.2)*
   Suite completa, Pint, PHPStan; revisión de la matriz RF↔módulo↔test completa.
